@@ -39,6 +39,7 @@
     <Compile Include="Tools\ILevel.cs" />
     <Compile Include="Tools\Tools.cs" />
     <Compile Include="Assets\Player.cs" />
+    <Compile Include="Assets\PlayerBullet.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

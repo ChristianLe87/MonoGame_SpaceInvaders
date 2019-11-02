@@ -10,12 +10,12 @@ namespace Shared
 
         public Level_1()
         {
-            player = new Player(new Vector2(50,50));
+            player = new Player(new Vector2(250,400));
         }
 
         public void LoadContent(GraphicsDevice graphicsDevice)
         {
-            player.LoadContent(graphicsDevice);
+            player.LoadContent();
         }
 
         public void Update()

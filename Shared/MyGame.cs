@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -16,6 +17,10 @@ namespace Shared
         Dictionary<string, ILevel> levels = new Dictionary<string, ILevel>() {
             { "Level_1", new Level_1() }
         };
+
+        public static List<PlayerBullet> playerBullets = new List<PlayerBullet>();
+
+        public static GraphicsDevice graphicsDevice;
 
 
         public MyGame()
@@ -40,13 +45,21 @@ namespace Shared
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            levels[actualScene].LoadContent(GraphicsDevice);
+            MyGame.graphicsDevice = GraphicsDevice;
+
+            levels[actualScene].LoadContent(graphicsDevice);
         }
 
 
         protected override void Update(GameTime gameTime)
         {
             levels[actualScene].Update();
+
+            foreach (var playerBullet in playerBullets) playerBullet.Update();
+
+            // Clean array (just active bullets)
+            playerBullets = playerBullets.Where(x => x.isActive == true).ToList();
+
             base.Update(gameTime);
         }
 
@@ -59,6 +72,8 @@ namespace Shared
             spriteBatch.Begin();
 
             levels[actualScene].Draw(spriteBatch);
+
+            foreach (var playerBullet in playerBullets) playerBullet.Draw(spriteBatch);
 
             spriteBatch.End();
 
