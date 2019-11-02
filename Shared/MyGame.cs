@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Shared
@@ -9,7 +10,13 @@ namespace Shared
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D ImageOne;
+
+        // Levels
+        string actualScene;
+        Dictionary<string, ILevel> levels = new Dictionary<string, ILevel>() {
+            { "Level_1", new Level_1() }
+        };
+
 
         public MyGame()
         {
@@ -23,6 +30,8 @@ namespace Shared
 
         protected override void Initialize()
         {
+            actualScene = "Level_1";
+
             base.Initialize();
         }
 
@@ -31,7 +40,7 @@ namespace Shared
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            ImageOne = Tools.CreateColorTexture(GraphicsDevice, Color.LightGreen);
+            levels[actualScene].LoadContent(GraphicsDevice);
         }
 
 
@@ -47,7 +56,9 @@ namespace Shared
             graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            spriteBatch.Draw(ImageOne, new Vector2(50, 50), new Rectangle(0,0, 100, 100), Color.White);
+
+            levels[actualScene].Draw(spriteBatch);
+
             spriteBatch.End();
 
             base.Draw(gameTime);
