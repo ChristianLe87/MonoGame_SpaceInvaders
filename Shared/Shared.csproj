@@ -38,6 +38,7 @@
     <Compile Include="Scenes\Level_1.cs" />
     <Compile Include="Tools\ILevel.cs" />
     <Compile Include="Tools\Tools.cs" />
+    <Compile Include="Assets\Player.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -45,6 +46,7 @@
   <ItemGroup>
     <Folder Include="Scenes\" />
     <Folder Include="Tools\" />
+    <Folder Include="Assets\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

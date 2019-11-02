@@ -46,6 +46,7 @@ namespace Shared
 
         protected override void Update(GameTime gameTime)
         {
+            levels[actualScene].Update();
             base.Update(gameTime);
         }
 
