@@ -7,12 +7,12 @@ namespace Shared
     public class PlayerBullet
     {
         Texture2D bulletImage;
-        public Rectangle playerRectangle;
+        public Rectangle playerBulletRectangle;
         public bool isActive = true;
 
         public PlayerBullet(Vector2 bulletPosition, int width, int heigh)
         {
-            this.playerRectangle = new Rectangle((int)bulletPosition.X, (int)bulletPosition.Y, width, heigh);
+            this.playerBulletRectangle = new Rectangle((int)bulletPosition.X, (int)bulletPosition.Y, width, heigh);
             this.bulletImage = Tools.CreateColorTexture(Color.White);// Tools.GetImageTexture("Bullet_40x80");
         }
 
@@ -21,8 +21,8 @@ namespace Shared
             int moveSpeed = 5;
             int maxPosition_Y = 15;
 
-            if (maxPosition_Y < playerRectangle.Y)
-                playerRectangle.Y -= moveSpeed;
+            if (maxPosition_Y < playerBulletRectangle.Y)
+                playerBulletRectangle.Y -= moveSpeed;
             else
                 isActive = false;
 
@@ -30,7 +30,7 @@ namespace Shared
 
         internal void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(bulletImage, playerRectangle, Color.White);
+            spriteBatch.Draw(bulletImage, playerBulletRectangle, Color.White);
         }
 
     }

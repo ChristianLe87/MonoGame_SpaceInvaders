@@ -42,6 +42,8 @@
     <Compile Include="Assets\PlayerBullet.cs" />
     <Compile Include="Assets\Alien_1.cs" />
     <Compile Include="Tools\IAlien.cs" />
+    <Compile Include="Tools\IShelter.cs" />
+    <Compile Include="Assets\Shelter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -20,6 +20,8 @@ namespace Shared
             {'x','x','x','x','x','x','x','x','x','x','x','x','x','x','x' }
         };
 
+        IShelter shelter;
+
         Player player;
 
 
@@ -45,6 +47,8 @@ namespace Shared
                     }
                 }
             }
+
+            shelter = new Shelter(new Rectangle(225,330, 40,20));
         }
 
         public void Update()
@@ -57,6 +61,8 @@ namespace Shared
 
             // Clean array (just active bullets)
             playerBullets = playerBullets.Where(x => x.isActive == true).ToList();
+
+            shelter.Update();
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -64,6 +70,7 @@ namespace Shared
             player.Draw(spriteBatch);
             foreach (var alien in aliens) alien.Draw(spriteBatch);
             foreach (var playerBullet in playerBullets) playerBullet.Draw(spriteBatch);
+            shelter.Draw(spriteBatch);
 
         }
     }

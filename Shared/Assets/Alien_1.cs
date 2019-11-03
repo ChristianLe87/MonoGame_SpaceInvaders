@@ -36,7 +36,7 @@ namespace Shared
             }
             foreach (var playerBullet in Level_1.playerBullets)
             {
-                if (alienRectangle.Contains(playerBullet.playerRectangle))
+                if (alienRectangle.Intersects(playerBullet.playerBulletRectangle))
                 {
                     this.isActive = false;
                 }
