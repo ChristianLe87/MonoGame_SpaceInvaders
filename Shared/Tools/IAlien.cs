@@ -6,14 +6,14 @@ namespace Shared
 {
     public interface IAlien
     {
-        Rectangle alienRectangle { get; }
-        bool isActive { get; }
+        //Rectangle alienRectangle { get; }
+        //bool isActive { get; }
 
         Texture2D alienImage { get; set; }
         //Vector2 position { get; set; }
 
         void LoadContent();
-        void Update();
+        void Update(int bb);
         void Draw(SpriteBatch spriteBatch);
     }
 }

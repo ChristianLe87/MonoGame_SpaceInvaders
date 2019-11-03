@@ -18,7 +18,6 @@ namespace Shared
             { "Level_1", new Level_1() }
         };
 
-        public static List<PlayerBullet> playerBullets = new List<PlayerBullet>();
 
         public static GraphicsDevice graphicsDevice;
 
@@ -53,12 +52,12 @@ namespace Shared
 
         protected override void Update(GameTime gameTime)
         {
+
+
+
             levels[actualScene].Update();
 
-            foreach (var playerBullet in playerBullets) playerBullet.Update();
-
-            // Clean array (just active bullets)
-            playerBullets = playerBullets.Where(x => x.isActive == true).ToList();
+            
 
             base.Update(gameTime);
         }
@@ -73,7 +72,6 @@ namespace Shared
 
             levels[actualScene].Draw(spriteBatch);
 
-            foreach (var playerBullet in playerBullets) playerBullet.Draw(spriteBatch);
 
             spriteBatch.End();
 

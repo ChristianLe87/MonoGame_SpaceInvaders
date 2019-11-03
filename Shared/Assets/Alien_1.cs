@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Shared
 {
@@ -8,24 +9,15 @@ namespace Shared
     {
 
 
-        public Rectangle alienRectangle => throw new NotImplementedException();
+        public Rectangle alienRectangle;
 
-        public bool isActive => throw new NotImplementedException();
+        public bool isActive = true;
 
         public Texture2D alienImage { get; set; }
-        public Vector2 position;
-
-
-        int width;
-        int height;
-
 
         public Alien_1(Vector2 position, int width, int height)
         {
-            this.width = width;
-            this.height = height;
-
-            this.position = position;
+            this.alienRectangle = new Rectangle((int)position.X, (int)position.Y, width, height);
             this.alienImage = Tools.CreateColorTexture(Color.Red);
         }
 
@@ -34,15 +26,29 @@ namespace Shared
             throw new NotImplementedException();
         }
 
-        public void Update()
+        public void Update(int bb)
         {
+
+            KeyboardState keyboardState = Keyboard.GetState();
+            if (keyboardState.IsKeyDown(Keys.P))
+            {
+                var bla = 0;
+            }
+            foreach (var playerBullet in Level_1.playerBullets)
+            {
+                if (alienRectangle.Contains(playerBullet.playerRectangle))
+                {
+                    this.isActive = false;
+                }
+            }
+
             int moveSpeed = 1;
-            position.X += moveSpeed;
+            alienRectangle.X += moveSpeed;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(alienImage, position, new Rectangle(0, 0, width, height), Color.White);
+            spriteBatch.Draw(alienImage, alienRectangle, Color.White);
         }
 
 

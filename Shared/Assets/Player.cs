@@ -8,14 +8,13 @@ namespace Shared
     public class Player
     {
         Texture2D ImageOne;
-        Vector2 position;
-
         double frameCount;
+        Rectangle rectangle;
 
-        public Player(Vector2 position)
+        public Player(Vector2 position, int width, int heigh)
         {
+            rectangle = new Rectangle((int)position.X, (int)position.Y, width, heigh);
             this.frameCount = 0;
-            this.position = position;
         }
 
         internal void LoadContent()
@@ -33,14 +32,16 @@ namespace Shared
             int minPosition = 50;
             int maxPosition = 450;
             
-            position = Tools.MovePlayer(keyboardState, position, minPosition, maxPosition, moveSpeed);
+            var result = Tools.MovePlayer(keyboardState, new Vector2(rectangle.X, rectangle.Y), minPosition, maxPosition, moveSpeed);
+            rectangle.X = (int)result.X;
+            rectangle.Y = (int)result.Y;
 
 
             if (keyboardState.IsKeyDown(Keys.J))
             {
                 if (frameCount > 30)
                 {
-                    MyGame.playerBullets.Add(new PlayerBullet(position));
+                    Level_1.playerBullets.Add(new PlayerBullet(new Vector2(rectangle.X, rectangle.Y),100,100));
                     frameCount = 0;
                 }
             }
@@ -50,7 +51,7 @@ namespace Shared
 
         internal void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(ImageOne, position, new Rectangle(0, 0, 100, 100), Color.White);
+            spriteBatch.Draw(ImageOne, rectangle, Color.White);
         }
 
 

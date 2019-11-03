@@ -22,9 +22,12 @@ namespace Shared
 
         Player player;
 
+
+        public static List<PlayerBullet> playerBullets = new List<PlayerBullet>();
+
         public Level_1()
         {
-            player = new Player(new Vector2(250,400));
+            player = new Player(new Vector2(250, 400), 25, 25);
         }
 
         public void LoadContent(GraphicsDevice graphicsDevice)
@@ -48,13 +51,20 @@ namespace Shared
         {
             player.Update();
 
-            foreach (var alien in aliens) alien.Update();
+            foreach (var alien in aliens) alien.Update(8);
+
+            foreach (var playerBullet in playerBullets) playerBullet.Update();
+
+            // Clean array (just active bullets)
+            playerBullets = playerBullets.Where(x => x.isActive == true).ToList();
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             player.Draw(spriteBatch);
             foreach (var alien in aliens) alien.Draw(spriteBatch);
+            foreach (var playerBullet in playerBullets) playerBullet.Draw(spriteBatch);
+
         }
     }
 }
