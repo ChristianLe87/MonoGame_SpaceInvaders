@@ -9,7 +9,5 @@ namespace Shared
         void Update();
 
         void Draw(SpriteBatch spriteBatch);
-
     }
-
 }

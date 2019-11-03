@@ -41,13 +41,5 @@ namespace Shared
 
             return position;
         }
-
-        internal static void PlayerShoot(KeyboardState keyboardState, Vector2 bulletPosition)
-        {
-            if (keyboardState.IsKeyDown(Keys.J))
-            {
-                MyGame.playerBullets.Add(new PlayerBullet(bulletPosition));
-            }
-        }
     }
 }

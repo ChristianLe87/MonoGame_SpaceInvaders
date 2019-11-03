@@ -40,6 +40,8 @@
     <Compile Include="Tools\Tools.cs" />
     <Compile Include="Assets\Player.cs" />
     <Compile Include="Assets\PlayerBullet.cs" />
+    <Compile Include="Assets\Alien_1.cs" />
+    <Compile Include="Tools\IAlien.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

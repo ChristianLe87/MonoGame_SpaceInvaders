@@ -32,14 +32,19 @@ namespace Shared
             int moveSpeed = 2;
             int minPosition = 50;
             int maxPosition = 450;
-
+            
             position = Tools.MovePlayer(keyboardState, position, minPosition, maxPosition, moveSpeed);
 
-            if (frameCount > 30)
+
+            if (keyboardState.IsKeyDown(Keys.J))
             {
-                Tools.PlayerShoot(keyboardState, position);
-                frameCount = 0;
+                if (frameCount > 30)
+                {
+                    MyGame.playerBullets.Add(new PlayerBullet(position));
+                    frameCount = 0;
+                }
             }
+            
 
         }
 

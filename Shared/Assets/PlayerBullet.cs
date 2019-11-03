@@ -6,7 +6,7 @@ namespace Shared
 {
     public class PlayerBullet
     {
-        Vector2 position;
+        public Vector2 position;
         Texture2D bulletImage;
 
         public bool isActive = true;
