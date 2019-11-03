@@ -8,7 +8,7 @@ namespace Shared
     public class Alien_1 : IAlien
     {
 
-
+        int direcction;
         public Rectangle alienRectangle;
 
         public bool isActive = true;
@@ -17,6 +17,7 @@ namespace Shared
 
         public Alien_1(Vector2 position, int width, int height)
         {
+            this.direcction = (int)Dir.MoveR;
             this.alienRectangle = new Rectangle((int)position.X, (int)position.Y, width, height);
             this.alienImage = Tools.CreateColorTexture(Color.Red);
         }
@@ -42,8 +43,20 @@ namespace Shared
                 }
             }
 
+            if(alienRectangle.X > 490)
+            {
+                direcction = (int)Dir.MoveL;
+                alienRectangle.Y += 10;
+            }
+
+            if (alienRectangle.X < 0)
+            {
+                direcction = (int)Dir.MoveR;
+                alienRectangle.Y += 10;
+            }
+
             int moveSpeed = 1;
-            alienRectangle.X += moveSpeed;
+            alienRectangle.X += moveSpeed * direcction;
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -51,6 +64,12 @@ namespace Shared
             spriteBatch.Draw(alienImage, alienRectangle, Color.White);
         }
 
+
+        public enum Dir
+        {
+            MoveR = 1,
+            MoveL = -1
+        }
 
     }
 }

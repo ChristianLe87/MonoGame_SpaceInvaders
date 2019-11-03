@@ -26,11 +26,15 @@ namespace Shared
             else
                 isActive = false;
 
+            
         }
 
         internal void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(bulletImage, playerBulletRectangle, Color.White);
+            if (isActive)
+            {
+                spriteBatch.Draw(bulletImage, playerBulletRectangle, Color.White);
+            }
         }
 
     }

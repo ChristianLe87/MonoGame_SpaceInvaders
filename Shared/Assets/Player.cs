@@ -41,7 +41,7 @@ namespace Shared
             {
                 if (frameCount > 30)
                 {
-                    Level_1.playerBullets.Add(new PlayerBullet(new Vector2(rectangle.X, rectangle.Y),100,100));
+                    Level_1.playerBullets.Add(new PlayerBullet(new Vector2(rectangle.X, rectangle.Y),10,10));
                     frameCount = 0;
                 }
             }
