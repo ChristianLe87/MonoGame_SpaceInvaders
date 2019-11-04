@@ -10,10 +10,10 @@ namespace Shared
         public Rectangle playerBulletRectangle;
         public bool isActive = true;
 
-        public PlayerBullet(Vector2 bulletPosition, int width, int heigh)
+        public PlayerBullet(Rectangle rectangle)
         {
-            this.playerBulletRectangle = new Rectangle((int)bulletPosition.X, (int)bulletPosition.Y, width, heigh);
-            this.bulletImage = Tools.CreateColorTexture(Color.White);// Tools.GetImageTexture("Bullet_40x80");
+            this.playerBulletRectangle = rectangle;
+            this.bulletImage = Tools.CreateColorTexture(Color.White);
         }
 
         internal void Update()
@@ -26,7 +26,13 @@ namespace Shared
             else
                 isActive = false;
 
-            
+            foreach (var shelter in Level_1.shelters)
+            {
+                if (playerBulletRectangle.Intersects(shelter.rectangle))
+                {
+                    isActive = false;
+                }
+            }
         }
 
         internal void Draw(SpriteBatch spriteBatch)

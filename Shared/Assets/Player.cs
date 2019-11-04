@@ -11,9 +11,9 @@ namespace Shared
         double frameCount;
         Rectangle rectangle;
 
-        public Player(Vector2 position, int width, int heigh)
+        public Player(Rectangle rectangle)// Vector2 position, int width, int heigh)
         {
-            rectangle = new Rectangle((int)position.X, (int)position.Y, width, heigh);
+            this.rectangle = rectangle;// new Rectangle((int)position.X, (int)position.Y, width, heigh);
             this.frameCount = 0;
         }
 
@@ -41,7 +41,7 @@ namespace Shared
             {
                 if (frameCount > 30)
                 {
-                    Level_1.playerBullets.Add(new PlayerBullet(new Vector2(rectangle.X, rectangle.Y),10,10));
+                    Level_1.playerBullets.Add(new PlayerBullet(new Rectangle(rectangle.X, rectangle.Y,10,10)));
                     frameCount = 0;
                 }
             }

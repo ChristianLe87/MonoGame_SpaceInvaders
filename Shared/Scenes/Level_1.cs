@@ -23,7 +23,7 @@ namespace Shared
 
 
         // --- Shelters ---
-        List<IShelter> shelters = new List<IShelter>();
+        public static List<IShelter> shelters = new List<IShelter>();
         char[,] sheltersMap =
         {
             {' ','x',' ','x',' ','x',' ','x',' ','x',' ' }
@@ -39,7 +39,7 @@ namespace Shared
 
         public Level_1()
         {
-            player = new Player(new Vector2(250, 400), 25, 25);
+            player = new Player(new Rectangle(250, 400, 25, 25));
         }
 
         public void LoadContent(GraphicsDevice graphicsDevice)
@@ -63,8 +63,9 @@ namespace Shared
 
             // Clean array (just active bullets)
             playerBullets = playerBullets.Where(x => x.isActive == true).ToList();
+            aliens = aliens.Where(x => x.isActive == true).ToList();
 
-            
+
 
         }
 
@@ -84,7 +85,7 @@ namespace Shared
                 {
                     if (aliensMap[row, element] == 'x')
                     {
-                        this.aliens.Add(new Alien_1(new Vector2(element * 25, row * 25), 20, 20));
+                        this.aliens.Add(new Alien_1(new Rectangle(element * 25, row * 25, 20, 20)));
                     }
                 }
             }
@@ -98,7 +99,7 @@ namespace Shared
                 {
                     if (sheltersMap[row, element] == 'x')
                     {
-                        this.shelters.Add(new Shelter(new Rectangle(element *45, 300, 40, 20)));
+                        shelters.Add(new Shelter(new Rectangle(element *45, 300, 40, 20)));
                     }
                 }
             }

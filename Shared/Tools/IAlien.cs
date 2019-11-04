@@ -7,7 +7,7 @@ namespace Shared
     public interface IAlien
     {
         //Rectangle alienRectangle { get; }
-        //bool isActive { get; }
+        bool isActive { get; set; }
 
         Texture2D alienImage { get; set; }
         //Vector2 position { get; set; }

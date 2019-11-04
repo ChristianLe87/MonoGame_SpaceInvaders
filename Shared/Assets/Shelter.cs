@@ -7,7 +7,7 @@ namespace Shared
 {
     public class Shelter : IShelter
     {
-        public Rectangle rectangle;
+        public Rectangle rectangle { get; set; }
         Texture2D shelterImage;
 
         public Shelter(Rectangle rectangle)

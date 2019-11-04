@@ -11,14 +11,17 @@ namespace Shared
         int direcction;
         public Rectangle alienRectangle;
 
-        public bool isActive = true;
+        //public bool isActive = true;
 
         public Texture2D alienImage { get; set; }
 
-        public Alien_1(Vector2 position, int width, int height)
+        public bool isActive { get; set; }
+
+        public Alien_1(Rectangle rectangle)
         {
+            this.isActive = true;
             this.direcction = (int)Dir.MoveR;
-            this.alienRectangle = new Rectangle((int)position.X, (int)position.Y, width, height);
+            this.alienRectangle = rectangle;
             this.alienImage = Tools.CreateColorTexture(Color.Red);
         }
 
@@ -61,7 +64,10 @@ namespace Shared
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(alienImage, alienRectangle, Color.White);
+            if (isActive)
+            {
+                spriteBatch.Draw(alienImage, alienRectangle, Color.White);
+            }
         }
 
 
