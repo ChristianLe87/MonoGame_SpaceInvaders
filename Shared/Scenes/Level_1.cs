@@ -88,7 +88,7 @@ namespace Shared
                 {
                     if (aliensMap[row, element] == 'x')
                     {
-                        aliens.Add(new Alien_1(new Rectangle(element * 25, row * 25, 20, 20)));
+                        aliens.Add(new Alien_1(new Rectangle(element * 25, row * 25, 20, 20), new Point(element, row)));
                     }
                 }
             }
