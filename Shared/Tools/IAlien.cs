@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Shared
 {
-    public interface IAlien
+    /*public interface IAlien
     {
         //Rectangle alienRectangle { get; }
         bool isActive { get; set; }
@@ -15,5 +15,5 @@ namespace Shared
         void LoadContent();
         void Update(int bb);
         void Draw(SpriteBatch spriteBatch);
-    }
+    }*/
 }

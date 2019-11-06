@@ -6,14 +6,15 @@ namespace Shared
 {
     public class PlayerBullet
     {
-        Texture2D bulletImage;
-        public Rectangle playerBulletRectangle;
-        public bool isActive = true;
+        Texture2D image;
+        public Rectangle rectangle;
+        public bool isActive;
 
         public PlayerBullet(Rectangle rectangle)
         {
-            this.playerBulletRectangle = rectangle;
-            this.bulletImage = Tools.CreateColorTexture(Color.White);
+            this.isActive = true;
+            this.rectangle = rectangle;
+            this.image = Tools.CreateColorTexture(Color.White);
         }
 
         internal void Update()
@@ -21,14 +22,23 @@ namespace Shared
             int moveSpeed = 5;
             int maxPosition_Y = 15;
 
-            if (maxPosition_Y < playerBulletRectangle.Y)
-                playerBulletRectangle.Y -= moveSpeed;
+            if (maxPosition_Y < rectangle.Y)
+                rectangle.Y -= moveSpeed;
             else
                 isActive = false;
 
             foreach (var shelter in Level_1.shelters)
             {
-                if (playerBulletRectangle.Intersects(shelter.rectangle))
+                if (rectangle.Intersects(shelter.rectangle))
+                {
+                    isActive = false;
+                }
+            }
+
+
+            foreach (var alien in Level_1.aliens)
+            {
+                if (rectangle.Intersects(alien.rectangle))
                 {
                     isActive = false;
                 }
@@ -39,7 +49,7 @@ namespace Shared
         {
             if (isActive)
             {
-                spriteBatch.Draw(bulletImage, playerBulletRectangle, Color.White);
+                spriteBatch.Draw(image, rectangle, Color.White);
             }
         }
 

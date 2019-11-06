@@ -5,27 +5,29 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Shared
 {
-    public class Shelter : IShelter
+    public class Shelter
     {
-        public Rectangle rectangle { get; set; }
+        public Rectangle rectangle;
         Texture2D shelterImage;
+        public bool isActive;
+        int life;
 
         public Shelter(Rectangle rectangle)
         {
+            this.isActive = true;
             this.rectangle = rectangle;
             this.shelterImage = Tools.CreateColorTexture(Color.Black);
+            this.life = 3;
         }
 
 
         public void Update()
         {
-            var bullets = Level_1.playerBullets;
-            if (bullets.Count > 0)
+            foreach (var bullet in Level_1.playerBullets)
             {
-                if (bullets[0].playerBulletRectangle.Intersects(rectangle))
-                {
-                    var bla = 0;
-                }
+                if (bullet.rectangle.Intersects(rectangle)) { life--; }
+
+                if (life < 1) { isActive = false; }
             }
         }
 

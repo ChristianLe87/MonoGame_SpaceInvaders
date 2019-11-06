@@ -7,19 +7,19 @@ namespace Shared
 {
     public class Player
     {
-        Texture2D ImageOne;
+        Texture2D image;
         double frameCount;
         Rectangle rectangle;
 
-        public Player(Rectangle rectangle)// Vector2 position, int width, int heigh)
+        public Player(Rectangle rectangle)
         {
-            this.rectangle = rectangle;// new Rectangle((int)position.X, (int)position.Y, width, heigh);
+            this.rectangle = rectangle;
             this.frameCount = 0;
         }
 
         internal void LoadContent()
         {
-            ImageOne = Tools.CreateColorTexture(Color.LightGreen);
+            image = Tools.CreateColorTexture(Color.LightGreen);
         }
 
         internal void Update()
@@ -51,7 +51,7 @@ namespace Shared
 
         internal void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(ImageOne, rectangle, Color.White);
+            spriteBatch.Draw(image, rectangle, Color.White);
         }
 
 

@@ -14,7 +14,7 @@ namespace Shared
 
         // Levels
         string actualScene;
-        Dictionary<string, ILevel> levels = new Dictionary<string, ILevel>() {
+        Dictionary<string, Level_1> levels = new Dictionary<string, Level_1>() {
             { "Level_1", new Level_1() }
         };
 
@@ -42,7 +42,6 @@ namespace Shared
 
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             MyGame.graphicsDevice = GraphicsDevice;
 
@@ -52,16 +51,10 @@ namespace Shared
 
         protected override void Update(GameTime gameTime)
         {
-
-
-
             levels[actualScene].Update();
-
-            
 
             base.Update(gameTime);
         }
-
 
 
         protected override void Draw(GameTime gameTime)
@@ -71,7 +64,6 @@ namespace Shared
             spriteBatch.Begin();
 
             levels[actualScene].Draw(spriteBatch);
-
 
             spriteBatch.End();
 

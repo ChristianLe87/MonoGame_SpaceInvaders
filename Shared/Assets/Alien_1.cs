@@ -5,24 +5,19 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Shared
 {
-    public class Alien_1 : IAlien
+    public class Alien_1
     {
-
-        int direcction;
-        public Rectangle alienRectangle;
-
-        //public bool isActive = true;
-
-        public Texture2D alienImage { get; set; }
-
-        public bool isActive { get; set; }
+        Dir direcction;
+        public Rectangle rectangle;
+        public Texture2D image;
+        public bool isActive;
 
         public Alien_1(Rectangle rectangle)
         {
             this.isActive = true;
-            this.direcction = (int)Dir.MoveR;
-            this.alienRectangle = rectangle;
-            this.alienImage = Tools.CreateColorTexture(Color.Red);
+            this.direcction = Dir.MoveR;
+            this.rectangle = rectangle;
+            this.image = Tools.CreateColorTexture(Color.Red);
         }
 
         public void LoadContent()
@@ -40,33 +35,33 @@ namespace Shared
             }
             foreach (var playerBullet in Level_1.playerBullets)
             {
-                if (alienRectangle.Intersects(playerBullet.playerBulletRectangle))
+                if (rectangle.Intersects(playerBullet.rectangle))
                 {
                     this.isActive = false;
                 }
             }
 
-            if(alienRectangle.X > 490)
+            if(rectangle.X > 490)
             {
-                direcction = (int)Dir.MoveL;
-                alienRectangle.Y += 10;
+                direcction = Dir.MoveL;
+                rectangle.Y += 10;
             }
 
-            if (alienRectangle.X < 0)
+            if (rectangle.X < 0)
             {
-                direcction = (int)Dir.MoveR;
-                alienRectangle.Y += 10;
+                direcction = Dir.MoveR;
+                rectangle.Y += 10;
             }
 
             int moveSpeed = 1;
-            alienRectangle.X += moveSpeed * direcction;
+            rectangle.X += moveSpeed * (int)direcction;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             if (isActive)
             {
-                spriteBatch.Draw(alienImage, alienRectangle, Color.White);
+                spriteBatch.Draw(image, rectangle, Color.White);
             }
         }
 

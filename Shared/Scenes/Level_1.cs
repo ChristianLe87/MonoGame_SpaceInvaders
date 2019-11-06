@@ -6,11 +6,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Shared
 {
-    public class Level_1 : ILevel
+    public class Level_1
     {
-        // --- Aliens ---
-        List<IAlien> aliens = new List<IAlien>();
+        // --- Player ---
+        Player player;
 
+
+        // --- Aliens ---
+        public static List<Alien_1> aliens = new List<Alien_1>();
         char[,] aliensMap = {
             {'x','x','x','x','x','x','x','x','x','x','x','x','x','x','x' },
             {'x','x','x','x','x','x','x','x','x','x','x','x','x','x','x' },
@@ -23,18 +26,15 @@ namespace Shared
 
 
         // --- Shelters ---
-        public static List<IShelter> shelters = new List<IShelter>();
+        public static List<Shelter> shelters = new List<Shelter>();
         char[,] sheltersMap =
         {
             {' ','x',' ','x',' ','x',' ','x',' ','x',' ' }
         };
 
 
-        // --- Player ---
-        Player player;
+        // --- PlayerBullets ---
         public static List<PlayerBullet> playerBullets = new List<PlayerBullet>();
-
-
 
 
         public Level_1()
@@ -52,20 +52,16 @@ namespace Shared
 
         public void Update()
         {
+            // Update Assets
             player.Update();
-
-            foreach (var alien in aliens) alien.Update(8);
-
             foreach (var playerBullet in playerBullets) playerBullet.Update();
-
+            foreach (var alien in aliens) alien.Update(8);
             foreach (var shelter in shelters) shelter.Update();
 
-
-            // Clean array (just active bullets)
+            // Clean lists
             playerBullets = playerBullets.Where(x => x.isActive == true).ToList();
             aliens = aliens.Where(x => x.isActive == true).ToList();
-
-
+            shelters = shelters.Where(x => x.isActive == true).ToList();
 
         }
 
@@ -85,7 +81,7 @@ namespace Shared
                 {
                     if (aliensMap[row, element] == 'x')
                     {
-                        this.aliens.Add(new Alien_1(new Rectangle(element * 25, row * 25, 20, 20)));
+                        aliens.Add(new Alien_1(new Rectangle(element * 25, row * 25, 20, 20)));
                     }
                 }
             }
