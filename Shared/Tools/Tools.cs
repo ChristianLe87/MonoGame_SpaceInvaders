@@ -11,7 +11,7 @@ namespace Shared
         internal static Texture2D CreateColorTexture(Color color)
         {
             Texture2D newTexture = new Texture2D(MyGame.graphicsDevice, 1, 1, false, SurfaceFormat.Color);
-            newTexture.SetData<Color>(new Color[] { color });
+            newTexture.SetData(new Color[] { color });
             return newTexture;
         }
 

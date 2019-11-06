@@ -8,7 +8,9 @@ namespace Shared
     public class Shelter
     {
         public Rectangle rectangle;
-        Texture2D shelterImage;
+        Texture2D image_3;
+        Texture2D image_2;
+        Texture2D image_1;
         public bool isActive;
         int life;
 
@@ -16,7 +18,9 @@ namespace Shared
         {
             this.isActive = true;
             this.rectangle = rectangle;
-            this.shelterImage = Tools.CreateColorTexture(Color.Black);
+            this.image_3 = Tools.CreateColorTexture(Color.Black);
+            this.image_2 = Tools.CreateColorTexture(Color.Gray);
+            this.image_1 = Tools.CreateColorTexture(Color.LightGray);
             this.life = 3;
         }
 
@@ -34,7 +38,19 @@ namespace Shared
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(shelterImage, rectangle, Color.White);
+            if (life == 3)
+            {
+                spriteBatch.Draw(image_3, rectangle, Color.White);
+            }
+            else if (life == 2)
+            {
+                spriteBatch.Draw(image_2, rectangle, Color.White);
+            }
+            else if (life == 1)
+            {
+                spriteBatch.Draw(image_1, rectangle, Color.White);
+            }
+
         }
 
         
