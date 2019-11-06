@@ -11,6 +11,8 @@ namespace Shared
         public Rectangle rectangle;
         public Texture2D image;
         public bool isActive;
+        public bool canShoot;
+        int frameCount;
 
         public Alien_1(Rectangle rectangle)
         {
@@ -18,6 +20,7 @@ namespace Shared
             this.direcction = Dir.MoveR;
             this.rectangle = rectangle;
             this.image = Tools.CreateColorTexture(Color.Red);
+            this.canShoot = true;
         }
 
         public void LoadContent()
@@ -25,20 +28,24 @@ namespace Shared
             throw new NotImplementedException();
         }
 
-        public void Update(int bb)
+        public void Update()
         {
+            frameCount++;
+            if (canShoot)
+            {
+                if (frameCount > 50)
+                {
+                    Level_1.alienBullets.Add(new AlienBullets(new Rectangle(rectangle.X, rectangle.Y, 5, 5)));
+                    frameCount = 0;
+                }
+                
+            }
 
             KeyboardState keyboardState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.P))
-            {
-                var bla = 0;
-            }
+
             foreach (var playerBullet in Level_1.playerBullets)
             {
-                if (rectangle.Intersects(playerBullet.rectangle))
-                {
-                    this.isActive = false;
-                }
+                if (rectangle.Intersects(playerBullet.rectangle)) { isActive = false; }
             }
 
             if(rectangle.X > 490)

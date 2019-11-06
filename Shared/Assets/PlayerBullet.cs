@@ -19,7 +19,7 @@ namespace Shared
 
         internal void Update()
         {
-            int moveSpeed = 5;
+            int moveSpeed = 7;
             int maxPosition_Y = 15;
 
             if (maxPosition_Y < rectangle.Y)
@@ -29,10 +29,7 @@ namespace Shared
 
             foreach (var shelter in Level_1.shelters)
             {
-                if (rectangle.Intersects(shelter.rectangle))
-                {
-                    isActive = false;
-                }
+                if (rectangle.Intersects(shelter.rectangle)) { isActive = false; }
             }
 
 

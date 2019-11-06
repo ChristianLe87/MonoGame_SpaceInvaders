@@ -37,6 +37,10 @@ namespace Shared
         public static List<PlayerBullet> playerBullets = new List<PlayerBullet>();
 
 
+        // --- AlienBullets ---
+        public static List<AlienBullets> alienBullets = new List<AlienBullets>();
+
+
         public Level_1()
         {
             player = new Player(new Rectangle(250, 400, 25, 25));
@@ -55,11 +59,13 @@ namespace Shared
             // Update Assets
             player.Update();
             foreach (var playerBullet in playerBullets) playerBullet.Update();
-            foreach (var alien in aliens) alien.Update(8);
+            foreach (var alienBullet in alienBullets) alienBullet.Update();
+            foreach (var alien in aliens) alien.Update();
             foreach (var shelter in shelters) shelter.Update();
 
             // Clean lists
             playerBullets = playerBullets.Where(x => x.isActive == true).ToList();
+            alienBullets = alienBullets.Where(x => x.isActive == true).ToList();
             aliens = aliens.Where(x => x.isActive == true).ToList();
             shelters = shelters.Where(x => x.isActive == true).ToList();
 
@@ -69,6 +75,7 @@ namespace Shared
         {
             player.Draw(spriteBatch);
             foreach (var alien in aliens) alien.Draw(spriteBatch);
+            foreach (var alienBullet in alienBullets) alienBullet.Draw(spriteBatch);
             foreach (var playerBullet in playerBullets) playerBullet.Draw(spriteBatch);
             foreach (var shelter in shelters) shelter.Draw(spriteBatch);
         }
