@@ -25,7 +25,7 @@ namespace Shared
             this.image = Tools.CreateColorTexture(Color.Red);
             this.canShoot = false;
             this.arrayPoint = arrayPoint;
-            this.frameShootInterval = new Random().Next(100, 400);
+            this.frameShootInterval = new Random().Next(100, 600);
         }
 
         public void LoadContent()
@@ -42,7 +42,7 @@ namespace Shared
                 {
                     Level_1.alienBullets.Add(new AlienBullets(new Rectangle(rectangle.X, rectangle.Y, 5, 5)));
                     frameCount = 0;
-                    this.frameShootInterval = new Random().Next(100, 400);
+                    this.frameShootInterval = new Random().Next(100, 600);
                 }
 
             }
@@ -70,17 +70,18 @@ namespace Shared
             rectangle.X += moveSpeed * (int)direcction;
 
             // check if can shoot
-            var result = Level_1.aliens.Where(x => x.arrayPoint.Y > arrayPoint.Y).ToList();
+            var result = Level_1.aliens
+                .Where(x => x.arrayPoint.X == arrayPoint.X)
+                .Where(x=> x.arrayPoint.Y > arrayPoint.Y)
+                .ToList();
+
             if (result.Count == 0) { canShoot = true; }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (isActive)
-            {
-                spriteBatch.Draw(image, rectangle, Color.White);
-            }
-        }
+            spriteBatch.Draw(image, rectangle, Color.White);
+        } 
 
         public enum Dir
         {
