@@ -46,7 +46,7 @@ namespace Shared
             player = new Player(new Rectangle(250, 400, 25, 25));
         }
 
-        public void LoadContent(GraphicsDevice graphicsDevice)
+        public void LoadContent()
         {
             player.LoadContent();
 

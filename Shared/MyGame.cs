@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -18,13 +17,13 @@ namespace Shared
             { "Level_1", new Level_1() }
         };
 
-
         public static GraphicsDevice graphicsDevice;
 
 
         public MyGame()
         {
             graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "/Users/christianlehnhoff/Repositorios/GitHub/MonoGame_SpaceInvaders/Content/";
 
             // Window size
             graphics.PreferredBackBufferWidth = 500;
@@ -45,14 +44,13 @@ namespace Shared
             spriteBatch = new SpriteBatch(GraphicsDevice);
             MyGame.graphicsDevice = GraphicsDevice;
 
-            levels[actualScene].LoadContent(graphicsDevice);
+            levels[actualScene].LoadContent();
         }
 
 
         protected override void Update(GameTime gameTime)
         {
             levels[actualScene].Update();
-
             base.Update(gameTime);
         }
 
