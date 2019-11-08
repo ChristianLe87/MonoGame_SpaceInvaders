@@ -44,7 +44,7 @@ namespace Shared
             spriteBatch = new SpriteBatch(GraphicsDevice);
             MyGame.graphicsDevice = GraphicsDevice;
 
-            levels[actualScene].LoadContent();
+            levels[actualScene].LoadContent(Content);
         }
 
 

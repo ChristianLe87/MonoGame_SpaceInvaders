@@ -51,7 +51,7 @@ namespace Shared
 
             foreach (var playerBullet in Level_1.playerBullets)
             {
-                if (rectangle.Intersects(playerBullet.rectangle)) { isActive = false; }
+                if (rectangle.Intersects(playerBullet.rectangle)) { isActive = false; Level_1.score += 10; }
             }
 
             if(rectangle.X > 490)

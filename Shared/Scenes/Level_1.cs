@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Shared
 {
     public class Level_1
     {
+
+        // --- Score ---
+        Text scoreLabel;
+        public static int score;
+
         // --- Player ---
         Player player;
 
@@ -46,12 +52,14 @@ namespace Shared
             player = new Player(new Rectangle(250, 400, 25, 25));
         }
 
-        public void LoadContent()
+        public void LoadContent(ContentManager contentManager)
         {
             player.LoadContent();
 
             SetUpAliensPosition();
             SetUpSheltersMap();
+
+            scoreLabel = new Text(contentManager, new Vector2(10, 10), "MyFont", $"Score {score}");
         }
 
         public void Update()
@@ -62,6 +70,7 @@ namespace Shared
             foreach (var alienBullet in alienBullets) alienBullet.Update();
             foreach (var alien in aliens) alien.Update();
             foreach (var shelter in shelters) shelter.Update();
+            scoreLabel.Update($"Score {score}");
 
             // Clean lists
             playerBullets = playerBullets.Where(x => x.isActive == true).ToList();
@@ -78,6 +87,7 @@ namespace Shared
             foreach (var alienBullet in alienBullets) alienBullet.Draw(spriteBatch);
             foreach (var playerBullet in playerBullets) playerBullet.Draw(spriteBatch);
             foreach (var shelter in shelters) shelter.Draw(spriteBatch);
+            scoreLabel.Draw(spriteBatch);
         }
 
         internal void SetUpAliensPosition()
