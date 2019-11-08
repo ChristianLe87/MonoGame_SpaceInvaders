@@ -14,6 +14,11 @@ namespace Shared
         Text scoreLabel;
         public static int score;
 
+
+        // --- PlayerHealth ---
+        Text playerHealthLabel;
+        //public static int playerHealth;
+
         // --- Player ---
         Player player;
 
@@ -60,6 +65,7 @@ namespace Shared
             SetUpSheltersMap();
 
             scoreLabel = new Text(contentManager, new Vector2(10, 10), "MyFont", $"Score {score}");
+            playerHealthLabel = new Text(contentManager, new Vector2(350, 10), "MyFont", $"Health {player.health}");
         }
 
         public void Update()
@@ -71,6 +77,7 @@ namespace Shared
             foreach (var alien in aliens) alien.Update();
             foreach (var shelter in shelters) shelter.Update();
             scoreLabel.Update($"Score {score}");
+            playerHealthLabel.Update($"Health {player.health}");
 
             // Clean lists
             playerBullets = playerBullets.Where(x => x.isActive == true).ToList();
@@ -88,6 +95,7 @@ namespace Shared
             foreach (var playerBullet in playerBullets) playerBullet.Draw(spriteBatch);
             foreach (var shelter in shelters) shelter.Draw(spriteBatch);
             scoreLabel.Draw(spriteBatch);
+            playerHealthLabel.Draw(spriteBatch);
         }
 
         internal void SetUpAliensPosition()

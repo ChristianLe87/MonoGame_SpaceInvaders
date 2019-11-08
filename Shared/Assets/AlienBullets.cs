@@ -6,7 +6,7 @@ namespace Shared
 {
     public class AlienBullets
     {
-        Rectangle rectangle;
+        public Rectangle rectangle;
         public bool isActive;
         public Texture2D image;
 

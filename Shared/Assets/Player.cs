@@ -9,11 +9,13 @@ namespace Shared
         Texture2D image;
         double frameCount;
         Rectangle rectangle;
+        public int health;
 
         public Player(Rectangle rectangle)
         {
             this.rectangle = rectangle;
             this.frameCount = 0;
+            this.health = 100;
         }
 
         internal void LoadContent()
@@ -42,6 +44,21 @@ namespace Shared
                 {
                     Level_1.playerBullets.Add(new PlayerBullet(new Rectangle(rectangle.X, rectangle.Y,10,10)));
                     frameCount = 0;
+
+                    int minusScore = 5;
+                    Level_1.score = Level_1.score > minusScore ? Level_1.score - minusScore : 0;
+                }
+            }
+
+            foreach (var alienBullet in Level_1.alienBullets)
+            {
+                if (rectangle.Intersects(alienBullet.rectangle))
+                {
+                    if (alienBullet.isActive)
+                    {
+                        health -= 10;
+                        alienBullet.isActive = false;
+                    }
                 }
             }
             
