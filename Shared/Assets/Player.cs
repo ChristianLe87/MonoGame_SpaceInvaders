@@ -36,7 +36,7 @@ namespace Shared
             rectangle.Y = (int)result.Y;
 
 
-            if (keyboardState.IsKeyDown(Keys.J))
+            if (keyboardState.IsKeyDown(Keys.J) || keyboardState.IsKeyDown(Keys.Space))
             {
                 if (frameCount > 30)
                 {
