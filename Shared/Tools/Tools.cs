@@ -46,9 +46,7 @@ namespace Shared
 
         internal static SoundEffect GetSoundEffect(string soundName)
         {
-
-            string relativePath = $"/Users/christianlehnhoff/Repositorios/GitHub/MonoGame_SpaceInvaders/Shared/Assets/{soundName}.wav";
-
+            string relativePath = $"../../../../MonoGame_SpaceInvaders/Shared/Assets/{soundName}.wav";
             string absolutePath = new DirectoryInfo(Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, relativePath))).ToString();
 
             FileStream fileStream = new FileStream(absolutePath, FileMode.Open);

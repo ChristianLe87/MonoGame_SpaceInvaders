@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -6,8 +8,6 @@ namespace Shared
 {
     public class MyGame : Game
     {
-        // Use NuGet: MonoGame.Framework.Portable
-
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -23,8 +23,11 @@ namespace Shared
 
         public MyGame()
         {
+            string relativePath = $"../../../../MonoGame_SpaceInvaders/Shared/Assets/";
+            string absolutePath = new DirectoryInfo(Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, relativePath))).ToString();
+
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "/Users/christianlehnhoff/Repositorios/GitHub/MonoGame_SpaceInvaders/Content/";
+            Content.RootDirectory = absolutePath;
 
             // Window size
             graphics.PreferredBackBufferWidth = 500;
