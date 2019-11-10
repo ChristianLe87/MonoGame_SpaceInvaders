@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -10,6 +11,8 @@ namespace Shared
         double frameCount;
         Rectangle rectangle;
         public int health;
+        SoundEffect sound_Laser_Shoot_1;
+        SoundEffect sound_Hit_Hurt_1;
 
         public Player(Rectangle rectangle)
         {
@@ -21,6 +24,8 @@ namespace Shared
         internal void LoadContent()
         {
             image = Tools.CreateColorTexture(Color.LightGreen);
+            sound_Laser_Shoot_1 = Tools.GetSoundEffect("Laser_Shoot_1");
+            sound_Hit_Hurt_1 = Tools.GetSoundEffect("Hit_Hurt_1");
         }
 
         internal void Update()
@@ -42,6 +47,7 @@ namespace Shared
             {
                 if (frameCount > 30)
                 {
+                    if (MyGame.soundEffectsOn) sound_Laser_Shoot_1.Play();
                     Level_1.playerBullets.Add(new PlayerBullet(new Rectangle(rectangle.X, rectangle.Y,10,10)));
                     frameCount = 0;
 
@@ -56,6 +62,7 @@ namespace Shared
                 {
                     if (alienBullet.isActive)
                     {
+                        if (MyGame.soundEffectsOn) sound_Hit_Hurt_1.Play();
                         health -= 10;
                         alienBullet.isActive = false;
                     }

@@ -19,6 +19,7 @@ namespace Shared
 
         public static GraphicsDevice graphicsDevice;
 
+        public static bool soundEffectsOn = false;
 
         public MyGame()
         {

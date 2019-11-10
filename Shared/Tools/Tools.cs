@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -41,6 +42,21 @@ namespace Shared
             }
 
             return position;
+        }
+
+        internal static SoundEffect GetSoundEffect(string soundName)
+        {
+
+            string relativePath = $"/Users/christianlehnhoff/Repositorios/GitHub/MonoGame_SpaceInvaders/Shared/Assets/{soundName}.wav";
+
+            string absolutePath = new DirectoryInfo(Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, relativePath))).ToString();
+
+            FileStream fileStream = new FileStream(absolutePath, FileMode.Open);
+
+            var result = SoundEffect.FromStream(fileStream);
+            fileStream.Dispose();
+
+            return result;
         }
     }
 }
