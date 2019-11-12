@@ -1,13 +1,12 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Shared
 {
-    /*public interface ILevel
+    public interface ILevel
     {
-        void LoadContent(GraphicsDevice graphicsDevice);
-
+        void LoadContent(ContentManager content);
         void Update();
-
         void Draw(SpriteBatch spriteBatch);
-    }*/
+    }
 }

@@ -13,7 +13,7 @@ namespace Shared
 
         // Levels
         string actualScene;
-        Dictionary<string, Level_1> levels = new Dictionary<string, Level_1>() {
+        Dictionary<string, ILevel> levels = new Dictionary<string, ILevel>() {
             { "Level_1", new Level_1() }
         };
 

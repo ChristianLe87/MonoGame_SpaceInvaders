@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Shared
 {
-    public class Level_1
+    public class Level_1 : ILevel
     {
 
         // --- Score ---
