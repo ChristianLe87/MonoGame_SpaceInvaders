@@ -19,6 +19,10 @@ namespace Shared
         Text playerHealthLabel;
         //public static int playerHealth;
 
+        // --- GameOver ---
+        Text gameOver;
+        FadeOut fadeOut;
+
         // --- Player ---
         Player player;
 
@@ -66,24 +70,34 @@ namespace Shared
 
             scoreLabel = new Text(contentManager, new Vector2(10, 10), "MyFont", $"Score {score}");
             playerHealthLabel = new Text(contentManager, new Vector2(350, 10), "MyFont", $"Health {player.health}");
+            gameOver = new Text(contentManager, new Vector2(200, 200), "MyFont", "Game Over");
+
+            fadeOut = new FadeOut(500, 500);
         }
 
         public void Update()
         {
             // Update Assets
-            player.Update();
-            foreach (var playerBullet in playerBullets) playerBullet.Update();
-            foreach (var alienBullet in alienBullets) alienBullet.Update();
-            foreach (var alien in aliens) alien.Update();
-            foreach (var shelter in shelters) shelter.Update();
-            scoreLabel.Update($"Score {score}");
-            playerHealthLabel.Update($"Health {player.health}");
+            if (player.health > 0)
+            {
+                player.Update();
+                foreach (var playerBullet in playerBullets) playerBullet.Update();
+                foreach (var alienBullet in alienBullets) alienBullet.Update();
+                foreach (var alien in aliens) alien.Update();
+                foreach (var shelter in shelters) shelter.Update();
+                scoreLabel.Update($"Score {score}");
+                playerHealthLabel.Update($"Health {player.health}");
 
-            // Clean lists
-            playerBullets = playerBullets.Where(x => x.isActive == true).ToList();
-            alienBullets = alienBullets.Where(x => x.isActive == true).ToList();
-            aliens = aliens.Where(x => x.isActive == true).ToList();
-            shelters = shelters.Where(x => x.isActive == true).ToList();
+                // Clean lists
+                playerBullets = playerBullets.Where(x => x.isActive == true).ToList();
+                alienBullets = alienBullets.Where(x => x.isActive == true).ToList();
+                aliens = aliens.Where(x => x.isActive == true).ToList();
+                shelters = shelters.Where(x => x.isActive == true).ToList();
+            }
+            else
+            {
+                fadeOut.Update(0.003f);
+            }
 
         }
 
@@ -94,6 +108,13 @@ namespace Shared
             foreach (var alienBullet in alienBullets) alienBullet.Draw(spriteBatch);
             foreach (var playerBullet in playerBullets) playerBullet.Draw(spriteBatch);
             foreach (var shelter in shelters) shelter.Draw(spriteBatch);
+            
+
+            // When game over
+            if (player.health <= 0) fadeOut.Draw(spriteBatch);
+            if (player.health <= 0) gameOver.Draw(spriteBatch);
+
+            // UI
             scoreLabel.Draw(spriteBatch);
             playerHealthLabel.Draw(spriteBatch);
         }

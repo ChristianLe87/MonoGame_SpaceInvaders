@@ -46,6 +46,7 @@
     <Compile Include="Assets\Shelter.cs" />
     <Compile Include="Assets\AlienBullets.cs" />
     <Compile Include="Assets\Text.cs" />
+    <Compile Include="Assets\FadeOut.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
