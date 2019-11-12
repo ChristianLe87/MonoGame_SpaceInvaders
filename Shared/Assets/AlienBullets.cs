@@ -21,6 +21,14 @@ namespace Shared
         {
             int speed = 5;
             rectangle.Y += speed;
+
+            foreach(var shelter in Level_1.shelters)
+            {
+                if (rectangle.Intersects(shelter.rectangle))
+                {
+                    isActive = false;
+                }
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
