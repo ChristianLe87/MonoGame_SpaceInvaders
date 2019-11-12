@@ -47,6 +47,7 @@
     <Compile Include="Assets\AlienBullets.cs" />
     <Compile Include="Assets\Text.cs" />
     <Compile Include="Assets\FadeOut.cs" />
+    <Compile Include="Menu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

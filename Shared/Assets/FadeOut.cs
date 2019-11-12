@@ -32,6 +32,11 @@ namespace Shared
                 sound_GameOverSound.Play();
                 playSound = false;
             }
+
+            if (alpha > 1f)
+            {
+                MyGame.actualScene = "Menu";
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)

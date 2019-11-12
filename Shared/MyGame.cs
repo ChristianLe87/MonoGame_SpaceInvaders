@@ -12,8 +12,9 @@ namespace Shared
         SpriteBatch spriteBatch;
 
         // Levels
-        string actualScene;
+        public static string actualScene;
         Dictionary<string, ILevel> levels = new Dictionary<string, ILevel>() {
+            { "Menu", new Menu() },
             { "Level_1", new Level_1() }
         };
 
