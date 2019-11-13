@@ -7,13 +7,8 @@ namespace Shared
     public class Menu : ILevel
     {
 
-        public Menu()
+        public Menu(ContentManager content)
         {
-        }
-
-        public void LoadContent(ContentManager content)
-        {
-            //throw new NotImplementedException();
         }
 
         public void Update()

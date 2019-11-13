@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Shared
@@ -13,10 +14,7 @@ namespace Shared
 
         // Levels
         public static string actualScene;
-        Dictionary<string, ILevel> levels = new Dictionary<string, ILevel>() {
-            { "Menu", new Menu() },
-            { "Level_1", new Level_1() }
-        };
+        Dictionary<string, ILevel> levels;
 
         public static GraphicsDevice graphicsDevice;
 
@@ -26,30 +24,35 @@ namespace Shared
         {
             string relativePath = $"../../../../MonoGame_SpaceInvaders/Shared/Assets/";
             string absolutePath = new DirectoryInfo(Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, relativePath))).ToString();
+            this.Content.RootDirectory = absolutePath;
 
-            graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = absolutePath;
+            this.graphics = new GraphicsDeviceManager(this);
 
             // Window size
-            graphics.PreferredBackBufferWidth = 500;
-            graphics.PreferredBackBufferHeight = 500;
+            this.graphics.PreferredBackBufferWidth = 500;
+            this.graphics.PreferredBackBufferHeight = 500;
         }
 
 
         protected override void Initialize()
         {
-            actualScene = "Level_1";
-
             base.Initialize();
         }
 
 
         protected override void LoadContent()
         {
+
+            actualScene = "Level_1";
+
             spriteBatch = new SpriteBatch(GraphicsDevice);
             MyGame.graphicsDevice = GraphicsDevice;
 
-            levels[actualScene].LoadContent(Content);
+
+            this.levels = new Dictionary<string, ILevel>() {
+            { "Menu", new Menu(Content) },
+            { "Level_1", new Level_1(Content) }
+            };
         }
 
 

@@ -19,10 +19,7 @@ namespace Shared
             this.rectangle = rectangle;
             this.frameCount = 0;
             this.health = 100;
-        }
 
-        internal void LoadContent()
-        {
             image = Tools.CreateColorTexture(Color.LightGreen);
             sound_Laser_Shoot_1 = Tools.GetSoundEffect("Laser_Shoot_1");
             sound_Hit_Hurt_1 = Tools.GetSoundEffect("Hit_Hurt_1");

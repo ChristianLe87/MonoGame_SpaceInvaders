@@ -56,14 +56,9 @@ namespace Shared
         public static List<AlienBullets> alienBullets = new List<AlienBullets>();
 
 
-        public Level_1()
+        public Level_1(ContentManager contentManager)
         {
             player = new Player(new Rectangle(250, 400, 25, 25));
-        }
-
-        public void LoadContent(ContentManager contentManager)
-        {
-            player.LoadContent();
 
             SetUpAliensPosition();
             SetUpSheltersMap();
