@@ -9,7 +9,7 @@ namespace Shared
     {
         Texture2D fadeOut;
         Rectangle rectangle;
-        float alpha;
+        public float alpha;
         SoundEffect sound_GameOverSound;
         bool playSound = true;
 
@@ -20,6 +20,14 @@ namespace Shared
             this.fadeOut = Tools.CreateColorTexture(new Color(Color.Black, this.alpha));
             this.rectangle = new Rectangle(0, 0, width, height);
             this.sound_GameOverSound = Tools.GetSoundEffect("GameOver");
+        }
+
+        public void Reset()
+        {
+            this.alpha = 0f;
+            this.fadeOut = Tools.CreateColorTexture(new Color(Color.Black, this.alpha));
+            //this.rectangle = new Rectangle(0, 0, width, height);
+            //this.sound_GameOverSound = Tools.GetSoundEffect("GameOver");
         }
 
         public void Update(float spead)
@@ -33,10 +41,7 @@ namespace Shared
                 playSound = false;
             }
 
-            if (alpha > 1f)
-            {
-                MyGame.actualScene = "Menu";
-            }
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)

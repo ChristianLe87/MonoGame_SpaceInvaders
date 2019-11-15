@@ -18,7 +18,7 @@ namespace Shared
         {
             this.rectangle = rectangle;
             this.frameCount = 0;
-            this.health = 100;
+            this.health = 10;
 
             image = Tools.CreateColorTexture(Color.LightGreen);
             sound_Laser_Shoot_1 = Tools.GetSoundEffect("Laser_Shoot_1");

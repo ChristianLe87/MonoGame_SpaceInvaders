@@ -25,7 +25,6 @@ namespace Shared
             string relativePath = $"../../../../MonoGame_SpaceInvaders/Shared/Assets/";
             string absolutePath = new DirectoryInfo(Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, relativePath))).ToString();
             this.Content.RootDirectory = absolutePath;
-
             this.graphics = new GraphicsDeviceManager(this);
 
             // Window size
@@ -42,16 +41,14 @@ namespace Shared
 
         protected override void LoadContent()
         {
-
-            actualScene = "Level_1";
+            actualScene = "Menu";
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
             MyGame.graphicsDevice = GraphicsDevice;
 
-
             this.levels = new Dictionary<string, ILevel>() {
-            { "Menu", new Menu(Content) },
-            { "Level_1", new Level_1(Content) }
+                { "Menu", new Menu(Content) },
+                { "Level_1", new Level_1(Content) }
             };
         }
 
@@ -59,6 +56,16 @@ namespace Shared
         protected override void Update(GameTime gameTime)
         {
             levels[actualScene].Update();
+
+            if(actualScene == "Menu")
+                this.IsMouseVisible = true;
+            else
+                this.IsMouseVisible = false;
+
+
+      
+
+
             base.Update(gameTime);
         }
 

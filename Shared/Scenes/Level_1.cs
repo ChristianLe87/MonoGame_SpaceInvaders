@@ -28,7 +28,7 @@ namespace Shared
 
 
         // --- Aliens ---
-        public static List<Alien_1> aliens = new List<Alien_1>();
+        public static List<Alien_1> aliens;// = new List<Alien_1>();
         char[,] aliensMap = {
             {'x','x','x','x','x','x','x','x','x','x','x','x','x','x','x' },
             {'x','x','x','x','x','x','x','x','x','x','x','x','x','x','x' },
@@ -70,6 +70,20 @@ namespace Shared
             fadeOut = new FadeOut(500, 500);
         }
 
+        public void Reset()
+        {
+            player = new Player(new Rectangle(250, 400, 25, 25));
+
+            SetUpAliensPosition();
+            SetUpSheltersMap();
+
+            //scoreLabel = new Text(contentManager, new Vector2(10, 10), "MyFont", $"Score {score}");
+            //playerHealthLabel = new Text(contentManager, new Vector2(350, 10), "MyFont", $"Health {player.health}");
+            //gameOver = new Text(contentManager, new Vector2(200, 200), "MyFont", "Game Over");
+
+            fadeOut = new FadeOut(500, 500);
+        }
+
         public void Update()
         {
             // Update Assets
@@ -94,6 +108,13 @@ namespace Shared
                 fadeOut.Update(0.003f);
             }
 
+
+            if (fadeOut.alpha > 1f)
+            {
+                Reset();
+                this.fadeOut.Reset();
+                MyGame.actualScene = "Menu";
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -116,6 +137,7 @@ namespace Shared
 
         internal void SetUpAliensPosition()
         {
+            aliens = new List<Alien_1>();
             for (int row = 0; row < aliensMap.GetLength(0); row++)
             {
                 for (int element = 0; element < aliensMap.GetLength(1); element++)

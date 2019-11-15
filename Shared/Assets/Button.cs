@@ -33,9 +33,14 @@ namespace Shared
             if (rectangle.Contains(mouseState.X, mouseState.Y))
             {
                 if (mouseState.LeftButton == ButtonState.Pressed)
+                {
                     this.buttonState = "pressedState";
+                    MyGame.actualScene = "Level_1";
+                }
                 else
+                {
                     this.buttonState = "hoverState";
+                }
             }
             else
             {
