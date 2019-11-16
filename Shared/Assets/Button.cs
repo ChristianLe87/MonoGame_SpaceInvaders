@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace Shared
 {
@@ -15,7 +16,7 @@ namespace Shared
 
         Rectangle rectangle;
 
-        string buttonState = "";
+        ButtonState buttonState;
 
         public Button(ContentManager contentManager, Rectangle rectangle, string text)
         {
@@ -26,7 +27,7 @@ namespace Shared
 
             this.rectangle = rectangle;
 
-            this.buttonState = "noState";
+            this.buttonState = ButtonState.noState;
         }
 
         public void Update()
@@ -36,19 +37,19 @@ namespace Shared
 
             if (rectangle.Contains(mouseState.X, mouseState.Y))
             {
-                if (mouseState.LeftButton == ButtonState.Pressed)
+                if ((int)mouseState.LeftButton == (int)ButtonState.pressedState)
                 {
-                    this.buttonState = "pressedState";
-                    MyGame.actualScene = "Level_1";
+                    this.buttonState = ButtonState.pressedState;
+                    MyGame.actualScene = WK.Scene.Level_1;
                 }
                 else
                 {
-                    this.buttonState = "hoverState";
+                    this.buttonState = ButtonState.hoverState;
                 }
             }
             else
             {
-                this.buttonState = "noState";
+                this.buttonState = ButtonState.noState;
             }
         }
 
@@ -56,13 +57,13 @@ namespace Shared
         {
             switch (buttonState)
             {
-                case "noState":
+                case ButtonState.noState:
                     spriteBatch.Draw(noState_Texture, rectangle, Color.White);
                     break;
-                case "hoverState":
+                case ButtonState.hoverState:
                     spriteBatch.Draw(hoverState_Texture, rectangle, Color.White);
                     break;
-                case "pressedState":
+                case ButtonState.pressedState:
                     spriteBatch.Draw(pressedState_Texture, rectangle, Color.White);
                     break;
                 default:
@@ -72,5 +73,12 @@ namespace Shared
             text.Draw(spriteBatch);
 
         }
+    }
+
+    enum ButtonState
+    {
+        noState = 0,
+        pressedState = 1,
+        hoverState = 2
     }
 }
