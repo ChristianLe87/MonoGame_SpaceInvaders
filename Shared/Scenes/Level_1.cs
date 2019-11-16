@@ -76,7 +76,7 @@ namespace Shared
 
             SetUpAliensPosition();
             SetUpSheltersMap();
-
+            score = 0;
             //scoreLabel = new Text(contentManager, new Vector2(10, 10), "MyFont", $"Score {score}");
             //playerHealthLabel = new Text(contentManager, new Vector2(350, 10), "MyFont", $"Health {player.health}");
             //gameOver = new Text(contentManager, new Vector2(200, 200), "MyFont", "Game Over");
@@ -111,8 +111,9 @@ namespace Shared
 
             if (fadeOut.alpha > 1f)
             {
-                Reset();
+                Tools.SaveHighScore(score);
                 this.fadeOut.Reset();
+                Reset();
                 MyGame.actualScene = "Menu";
             }
         }
@@ -158,7 +159,7 @@ namespace Shared
                 {
                     if (sheltersMap[row, element] == 'x')
                     {
-                        shelters.Add(new Shelter(new Rectangle(element *45, 300, 40, 20)));
+                        shelters.Add(new Shelter(new Rectangle(element * 45, 300, 40, 20)));
                     }
                 }
             }

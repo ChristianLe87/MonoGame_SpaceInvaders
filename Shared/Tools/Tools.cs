@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Shared
 {
@@ -55,6 +57,45 @@ namespace Shared
             fileStream.Dispose();
 
             return result;
+        }
+
+        internal static void SaveHighScore(int score)
+        {
+            string relativePath = $"../../../../MonoGame_SpaceInvaders/Shared/Assets/{WK.File.Json}.txt";
+            string absolutePath = new DirectoryInfo(Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, relativePath))).ToString();
+
+
+            if (File.Exists(absolutePath))
+            {
+
+                int oldScore = GetHighScore();
+
+                if (oldScore < score)
+                {
+                    File.Delete(absolutePath);
+
+                    using (TextWriter file = new StreamWriter(absolutePath))
+                    {
+                        file.Write(score);
+                    }
+                }
+            }
+            else
+            {
+                using (TextWriter file = new StreamWriter(absolutePath))
+                {
+                    file.Write(score);
+                }
+            }
+        }
+
+        internal static int GetHighScore()
+        {
+            string relativePath = $"../../../../MonoGame_SpaceInvaders/Shared/Assets/{WK.File.Json}.txt";
+            string absolutePath = new DirectoryInfo(Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, relativePath))).ToString();
+
+            var highScore = File.ReadAllText(absolutePath);
+            return Int32.Parse(highScore);
         }
 
     }
