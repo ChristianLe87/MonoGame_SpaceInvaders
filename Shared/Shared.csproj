@@ -49,6 +49,7 @@
     <Compile Include="Assets\FadeOut.cs" />
     <Compile Include="Scenes\Menu.cs" />
     <Compile Include="Assets\Button.cs" />
+    <Compile Include="WK.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

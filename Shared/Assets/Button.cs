@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -10,12 +11,15 @@ namespace Shared
         Texture2D hoverState_Texture;
         Texture2D pressedState_Texture;
 
+        Text text;
+
         Rectangle rectangle;
 
         string buttonState = "";
 
-        public Button(Rectangle rectangle)
+        public Button(ContentManager contentManager, Rectangle rectangle, string text)
         {
+            this.text = new Text(contentManager, new Vector2(rectangle.X, rectangle.Y), WK.File.Font, text);
             this.noState_Texture = Tools.CreateColorTexture(Color.Gray);
             this.hoverState_Texture = Tools.CreateColorTexture(Color.LightGray);
             this.pressedState_Texture = Tools.CreateColorTexture(Color.DarkGray);
@@ -65,7 +69,8 @@ namespace Shared
                     break;
             }
 
-        }
+            text.Draw(spriteBatch);
 
+        }
     }
 }

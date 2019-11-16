@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -8,9 +9,9 @@ namespace Shared
     {
         Button button;
 
-        public Menu(ContentManager content)
+        public Menu(ContentManager contentManager)
         {
-            button = new Button(new Microsoft.Xna.Framework.Rectangle(100,100,100,100));
+            button = new Button(contentManager, new Rectangle(100, 100, 100, 100), "Play !");
         }
 
         public void Update()
