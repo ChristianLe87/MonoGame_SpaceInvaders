@@ -61,7 +61,7 @@ namespace Shared
 
         internal static void SaveHighScore(int score)
         {
-            string relativePath = $"../../../../MonoGame_SpaceInvaders/Shared/Assets/{WK.File.Json}.txt";
+            string relativePath = $"{WK.File.Json}.txt";
             string absolutePath = new DirectoryInfo(Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, relativePath))).ToString();
 
 
@@ -91,11 +91,23 @@ namespace Shared
 
         internal static int GetHighScore()
         {
-            string relativePath = $"../../../../MonoGame_SpaceInvaders/Shared/Assets/{WK.File.Json}.txt";
+            string relativePath = $"{WK.File.Json}.txt";
             string absolutePath = new DirectoryInfo(Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, relativePath))).ToString();
 
-            var highScore = File.ReadAllText(absolutePath);
-            return Int32.Parse(highScore);
+            if (File.Exists(absolutePath))
+            {
+                var highScore = File.ReadAllText(absolutePath);
+                return Int32.Parse(highScore);
+            }
+            else
+            {
+                using (TextWriter file = new StreamWriter(absolutePath))
+                {
+                    file.Write(0);
+                    return 0;
+                }
+            }
+            
         }
 
     }
