@@ -66,7 +66,11 @@ namespace Shared
                 }
             }
             
-
+            if (health <= 0)
+            {
+                health = 0;
+                Level_1.gameMode = Level_1.GameMode_Enum.GameOver;
+            }
         }
 
         internal void Draw(SpriteBatch spriteBatch)

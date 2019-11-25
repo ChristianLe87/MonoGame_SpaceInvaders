@@ -17,11 +17,12 @@ namespace Shared
 
         // --- PlayerHealth ---
         Text playerHealthLabel;
-        //public static int playerHealth;
 
         // --- GameOver ---
         Text gameOver;
         FadeOut fadeOut;
+        Text youWin;
+        public static GameMode_Enum gameMode;
 
         // --- Player ---
         Player player;
@@ -58,6 +59,7 @@ namespace Shared
 
         public Level_1(ContentManager contentManager)
         {
+            gameMode = GameMode_Enum.Playing;
             player = new Player(new Rectangle(250, 400, 25, 25));
 
             SetUpAliensPosition();
@@ -66,6 +68,7 @@ namespace Shared
             scoreLabel = new Text(contentManager, new Vector2(10, 10), "MyFont", $"Score {score}");
             playerHealthLabel = new Text(contentManager, new Vector2(350, 10), "MyFont", $"Health {player.health}");
             gameOver = new Text(contentManager, new Vector2(200, 200), "MyFont", "Game Over");
+            youWin = new Text(contentManager, new Vector2(200, 200), "MyFont", "You Win");
 
             fadeOut = new FadeOut(500, 500);
         }
@@ -82,12 +85,13 @@ namespace Shared
             //gameOver = new Text(contentManager, new Vector2(200, 200), "MyFont", "Game Over");
 
             fadeOut = new FadeOut(500, 500);
+            gameMode = GameMode_Enum.Playing;
         }
 
         public void Update()
         {
             // Update Assets
-            if (player.health > 0)
+            if (gameMode == GameMode_Enum.Playing)
             {
                 player.Update();
                 foreach (var playerBullet in playerBullets) playerBullet.Update();
@@ -102,6 +106,11 @@ namespace Shared
                 alienBullets = alienBullets.Where(x => x.isActive == true).ToList();
                 aliens = aliens.Where(x => x.isActive == true).ToList();
                 shelters = shelters.Where(x => x.isActive == true).ToList();
+
+                if(aliens.Count == 0)
+                {
+                    gameMode = GameMode_Enum.YouWin;
+                }
             }
             else
             {
@@ -125,11 +134,19 @@ namespace Shared
             foreach (var alienBullet in alienBullets) alienBullet.Draw(spriteBatch);
             foreach (var playerBullet in playerBullets) playerBullet.Draw(spriteBatch);
             foreach (var shelter in shelters) shelter.Draw(spriteBatch);
-            
+
 
             // When game over
-            if (player.health <= 0) fadeOut.Draw(spriteBatch);
-            if (player.health <= 0) gameOver.Draw(spriteBatch);
+            if (gameMode == GameMode_Enum.GameOver)
+            {
+                fadeOut.Draw(spriteBatch);
+                gameOver.Draw(spriteBatch);
+            }
+            else if (gameMode == GameMode_Enum.YouWin)
+            {
+                fadeOut.Draw(spriteBatch);
+                youWin.Draw(spriteBatch);
+            }
 
             // UI
             scoreLabel.Draw(spriteBatch);
@@ -163,6 +180,13 @@ namespace Shared
                     }
                 }
             }
+        }
+
+        public enum GameMode_Enum
+        {
+            GameOver = 0,
+            YouWin = 1,
+            Playing = 2
         }
     }
 }
