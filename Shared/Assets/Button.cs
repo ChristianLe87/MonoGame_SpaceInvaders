@@ -20,14 +20,16 @@ namespace Shared
 
         public Button(ContentManager contentManager, Rectangle rectangle, string text)
         {
-            this.text = new Text(contentManager, new Vector2(rectangle.X, rectangle.Y), WK.File.Font, text);
             this.noState_Texture = Tools.CreateColorTexture(Color.Gray);
             this.hoverState_Texture = Tools.CreateColorTexture(Color.LightGray);
             this.pressedState_Texture = Tools.CreateColorTexture(Color.DarkGray);
 
-            this.rectangle = rectangle;
+            this.rectangle = new Rectangle(rectangle.X - rectangle.Width / 2, rectangle.Y - rectangle.Height / 2, rectangle.Width, rectangle.Height);
 
             this.buttonState = ButtonState.noState;
+
+            this.text = new Text(contentManager, new Vector2(rectangle.X - rectangle.Width / 2, rectangle.Y - rectangle.Height / 2), WK.File.Font, text);
+
         }
 
         public void Update()

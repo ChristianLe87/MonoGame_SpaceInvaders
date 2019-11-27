@@ -9,27 +9,28 @@ namespace Shared
 {
     public class MyGame : Game
     {
-        GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         // Levels
         public static string actualScene;
         Dictionary<string, ILevel> levels;
 
-        public static GraphicsDevice graphicsDevice;
-
+        // Statics
+        public static GraphicsDeviceManager graphicsDeviceManager;
         public static bool soundEffectsOn = true;
+        public const int canvasWidth = 500;
+        public const int canvasHeight = 500;
 
         public MyGame()
         {
             string relativePath = $"../../../../MonoGame_SpaceInvaders/Shared/Assets/";
             string absolutePath = new DirectoryInfo(Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, relativePath))).ToString();
             this.Content.RootDirectory = absolutePath;
-            this.graphics = new GraphicsDeviceManager(this);
+            graphicsDeviceManager = new GraphicsDeviceManager(this);
 
             // Window size
-            this.graphics.PreferredBackBufferWidth = 500;
-            this.graphics.PreferredBackBufferHeight = 500;
+            graphicsDeviceManager.PreferredBackBufferWidth = canvasWidth;
+            graphicsDeviceManager.PreferredBackBufferHeight = canvasHeight;
         }
 
 
@@ -41,14 +42,13 @@ namespace Shared
 
         protected override void LoadContent()
         {
-            actualScene = "Menu";
+            actualScene = WK.Scene.Menu;
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            MyGame.graphicsDevice = GraphicsDevice;
 
             this.levels = new Dictionary<string, ILevel>() {
-                { "Menu", new Menu(Content) },
-                { "Level_1", new Level_1(Content) }
+                { WK.Scene.Menu, new Menu(Content) },
+                { WK.Scene.Level_1, new Level_1(Content) }
             };
         }
 
@@ -57,13 +57,10 @@ namespace Shared
         {
             levels[actualScene].Update();
 
-            if(actualScene == "Menu")
+            if(actualScene == WK.Scene.Menu)
                 this.IsMouseVisible = true;
             else
                 this.IsMouseVisible = false;
-
-
-      
 
 
             base.Update(gameTime);
@@ -72,7 +69,7 @@ namespace Shared
 
         protected override void Draw(GameTime gameTime)
         {
-            graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
+            graphicsDeviceManager.GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
 

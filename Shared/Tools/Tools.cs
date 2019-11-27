@@ -14,7 +14,7 @@ namespace Shared
     {
         internal static Texture2D CreateColorTexture(Color color)
         {
-            Texture2D newTexture = new Texture2D(MyGame.graphicsDevice, 1, 1, false, SurfaceFormat.Color);
+            Texture2D newTexture = new Texture2D(MyGame.graphicsDeviceManager.GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             newTexture.SetData(new Color[] { color });
             return newTexture;
         }
@@ -26,7 +26,7 @@ namespace Shared
 
             FileStream fileStream = new FileStream(absolutePath, FileMode.Open);
 
-            var result = Texture2D.FromStream(MyGame.graphicsDevice, fileStream);
+            var result = Texture2D.FromStream(MyGame.graphicsDeviceManager.GraphicsDevice, fileStream);
             fileStream.Dispose();
 
             return result;

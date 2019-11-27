@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -7,6 +8,7 @@ namespace Shared
 {
     public class Player
     {
+
         Texture2D image;
         double frameCount;
         Rectangle rectangle;
@@ -14,15 +16,22 @@ namespace Shared
         SoundEffect sound_Laser_Shoot_1;
         SoundEffect sound_Hit_Hurt_1;
 
+        // Initial values
+        PlayerInitialValues playerInitialValues;
+
         public Player(Rectangle rectangle)
         {
-            this.rectangle = rectangle;
+            // initial values
+            playerInitialValues = new PlayerInitialValues(rectangle, 10);
+
+
+            this.rectangle = playerInitialValues.initialRectangle;
             this.frameCount = 0;
-            this.health = 10;
+            this.health = playerInitialValues.health;
 
             image = Tools.CreateColorTexture(Color.LightGreen);
-            sound_Laser_Shoot_1 = Tools.GetSoundEffect("Laser_Shoot_1");
-            sound_Hit_Hurt_1 = Tools.GetSoundEffect("Hit_Hurt_1");
+            sound_Laser_Shoot_1 = Tools.GetSoundEffect(WK.File.Laser_Shoot_1);
+            sound_Hit_Hurt_1 = Tools.GetSoundEffect(WK.File.HurtSound);
         }
 
         internal void Update()
@@ -33,19 +42,19 @@ namespace Shared
 
             int moveSpeed = 2;
             int minPosition = 50;
-            int maxPosition = 450;
+            int maxPosition = MyGame.canvasWidth - 50;
             
             var result = Tools.MovePlayer(keyboardState, new Vector2(rectangle.X, rectangle.Y), minPosition, maxPosition, moveSpeed);
             rectangle.X = (int)result.X;
             rectangle.Y = (int)result.Y;
 
 
-            if (keyboardState.IsKeyDown(Keys.J) || keyboardState.IsKeyDown(Keys.Space))
+            if (keyboardState.IsKeyDown(Keys.Space))
             {
                 if (frameCount > 30)
                 {
                     if (MyGame.soundEffectsOn) sound_Laser_Shoot_1.Play();
-                    Level_1.playerBullets.Add(new PlayerBullet(new Rectangle(rectangle.X, rectangle.Y,10,10)));
+                    Level_1.playerBullets.Add(new PlayerBullet(rectangle.Center, 10, 10));
                     frameCount = 0;
 
                     int minusScore = 5;
@@ -78,6 +87,23 @@ namespace Shared
             spriteBatch.Draw(image, rectangle, Color.White);
         }
 
+        internal void Reset()
+        {
+            this.rectangle = playerInitialValues.initialRectangle;
+            this.health = playerInitialValues.health;
+        }
 
+        private class PlayerInitialValues
+        {
+            public Rectangle initialRectangle { get; private set; }
+            public int health { get; private set; }
+
+            public PlayerInitialValues(Rectangle initialRectangle, int health)
+            {
+                this.initialRectangle = initialRectangle;
+                this.health = health;
+            }
+
+        }
     }
 }

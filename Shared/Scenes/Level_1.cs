@@ -29,7 +29,7 @@ namespace Shared
 
 
         // --- Aliens ---
-        public static List<Alien_1> aliens;// = new List<Alien_1>();
+        public static List<Alien_1> aliens;
         char[,] aliensMap = {
             {'x','x','x','x','x','x','x','x','x','x','x','x','x','x','x' },
             {'x','x','x','x','x','x','x','x','x','x','x','x','x','x','x' },
@@ -60,31 +60,29 @@ namespace Shared
         public Level_1(ContentManager contentManager)
         {
             gameMode = GameMode_Enum.Playing;
-            player = new Player(new Rectangle(250, 400, 25, 25));
+
+            player = new Player(new Rectangle(MyGame.canvasWidth / 2, MyGame.canvasHeight - 50, 25, 25));
 
             SetUpAliensPosition();
             SetUpSheltersMap();
 
-            scoreLabel = new Text(contentManager, new Vector2(10, 10), "MyFont", $"Score {score}");
-            playerHealthLabel = new Text(contentManager, new Vector2(350, 10), "MyFont", $"Health {player.health}");
-            gameOver = new Text(contentManager, new Vector2(200, 200), "MyFont", "Game Over");
-            youWin = new Text(contentManager, new Vector2(200, 200), "MyFont", "You Win");
+            scoreLabel = new Text(contentManager, new Vector2(10, 10), WK.File.Font, $"Score {score}");
+            playerHealthLabel = new Text(contentManager, new Vector2(350, 10), WK.File.Font, $"Health {player.health}");
+            gameOver = new Text(contentManager, new Vector2(200, 200), WK.File.Font, "Game Over");
+            youWin = new Text(contentManager, new Vector2(200, 200), WK.File.Font, "You Win");
 
-            fadeOut = new FadeOut(500, 500);
+            fadeOut = new FadeOut(MyGame.canvasWidth, MyGame.canvasHeight);
         }
 
         public void Reset()
         {
-            player = new Player(new Rectangle(250, 400, 25, 25));
+            player.Reset();
 
             SetUpAliensPosition();
             SetUpSheltersMap();
             score = 0;
-            //scoreLabel = new Text(contentManager, new Vector2(10, 10), "MyFont", $"Score {score}");
-            //playerHealthLabel = new Text(contentManager, new Vector2(350, 10), "MyFont", $"Health {player.health}");
-            //gameOver = new Text(contentManager, new Vector2(200, 200), "MyFont", "Game Over");
 
-            fadeOut = new FadeOut(500, 500);
+            fadeOut = new FadeOut(MyGame.canvasWidth, MyGame.canvasHeight);
             gameMode = GameMode_Enum.Playing;
         }
 
@@ -123,7 +121,7 @@ namespace Shared
                 Tools.SaveHighScore(score);
                 this.fadeOut.Reset();
                 Reset();
-                MyGame.actualScene = "Menu";
+                MyGame.actualScene = WK.Scene.Menu;
             }
         }
 

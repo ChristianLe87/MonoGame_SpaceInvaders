@@ -10,10 +10,10 @@ namespace Shared
         public Rectangle rectangle;
         public bool isActive;
 
-        public PlayerBullet(Rectangle rectangle)
+        public PlayerBullet(Point position, int Width, int Height)
         {
             this.isActive = true;
-            this.rectangle = rectangle;
+            this.rectangle = new Rectangle(position.X - Width / 2, position.Y - Height / 2, Width, Height);
             this.image = Tools.CreateColorTexture(Color.White);
         }
 
