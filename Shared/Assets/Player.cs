@@ -22,7 +22,7 @@ namespace Shared
         public Player(Rectangle rectangle)
         {
             // initial values
-            playerInitialValues = new PlayerInitialValues(rectangle, 10);
+            playerInitialValues = new PlayerInitialValues(rectangle, 50);
 
 
             this.rectangle = playerInitialValues.initialRectangle;
