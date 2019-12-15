@@ -13,7 +13,7 @@ namespace macOS_Cocoa
         {
             NSApplication.Init();
 
-            using (var game = new Game1())
+            using (var game = new MyGame())
             {
                 game.Run();
             }
