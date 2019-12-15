@@ -99,6 +99,12 @@
       <SmartLink>False</SmartLink>
     </NativeReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SharedMultiplataforma\SharedMultiplataforma.csproj">
+      <Project>{FB70D906-E416-434C-81A7-495B00C07BE6}</Project>
+      <Name>SharedMultiplataforma</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
   <Import Project="..\packages\MonoGame.Framework.MacOS.3.7.1.189\build\MonoGame.Framework.MacOS.targets" Condition="Exists('..\packages\MonoGame.Framework.MacOS.3.7.1.189\build\MonoGame.Framework.MacOS.targets')" />
 </Project>

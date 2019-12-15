@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiPlatform", "MultiPlatf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "macOS_Cocoa", "macOS_Cocoa\macOS_Cocoa.csproj", "{1130E254-18A8-4518-8C58-9DBF4A74DA07}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedMultiplataforma", "SharedMultiplataforma\SharedMultiplataforma.csproj", "{FB70D906-E416-434C-81A7-495B00C07BE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|anycpu = Debug|anycpu
@@ -31,5 +33,9 @@ Global
 		{1130E254-18A8-4518-8C58-9DBF4A74DA07}.Debug|anycpu.Build.0 = Debug|Any CPU
 		{1130E254-18A8-4518-8C58-9DBF4A74DA07}.Release|anycpu.ActiveCfg = Release|Any CPU
 		{1130E254-18A8-4518-8C58-9DBF4A74DA07}.Release|anycpu.Build.0 = Release|Any CPU
+		{FB70D906-E416-434C-81A7-495B00C07BE6}.Debug|anycpu.ActiveCfg = Debug|Any CPU
+		{FB70D906-E416-434C-81A7-495B00C07BE6}.Debug|anycpu.Build.0 = Debug|Any CPU
+		{FB70D906-E416-434C-81A7-495B00C07BE6}.Release|anycpu.ActiveCfg = Release|Any CPU
+		{FB70D906-E416-434C-81A7-495B00C07BE6}.Release|anycpu.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
